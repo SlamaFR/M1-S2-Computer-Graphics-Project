@@ -5,8 +5,8 @@ void drawSpherePoints(struct shape__s_ *this, G3Xvector scale) {
     int n1 = this->n1;
     int n2 = this->n2;
 
-    int step1 = scale.x > 0 ? 1. / scale.x : 1;
-    int step2 = scale.y > 0 ? 1. / scale.y : 1;
+    int step1 = min(1, scale.x > 0 ? 1. / scale.x : 1);
+    int step2 = min(1, scale.y > 0 ? 1. / scale.y : 1);
 
     glPointSize(2);
     glBegin(GL_POINTS);
@@ -25,14 +25,11 @@ void drawSphereFaces(struct shape__s_ *this, G3Xvector scale) {
     int step1 = scale.x > 0 ? 1. / scale.x : 1;
     int step2 = scale.y > 0 ? 1. / scale.y : 1;
 
-    glBegin(GL_TRIANGLES);
+    glBegin(GL_QUADS);
     for (int i = 0; i < n1 - 1; i += step1) {
         for (int j = 0; j < n2 - 1; j += step2) {
             g3x_NormalVertex3dv(this, i * n2 + j);
             g3x_NormalVertex3dv(this, i * n2 + min(j + step2, n2 - 1));
-            g3x_NormalVertex3dv(this, min(i + step1, n1 - 1) * n2 + min(j + step2, n2 - 1));
-
-            g3x_NormalVertex3dv(this, i * n2 + j);
             g3x_NormalVertex3dv(this, min(i + step1, n1 - 1) * n2 + min(j + step2, n2 - 1));
             g3x_NormalVertex3dv(this, min(i + step1, n1 - 1) * n2 + j);
         }
@@ -41,9 +38,6 @@ void drawSphereFaces(struct shape__s_ *this, G3Xvector scale) {
     for (int j = 0; j < n2 - 1; j += step2) {
         g3x_NormalVertex3dv(this, (n1 - 1) * n2 + j);
         g3x_NormalVertex3dv(this, (n1 - 1) * n2 + min(j + step2, n2 - 1));
-        g3x_NormalVertex3dv(this, min(j + step2, n2 - 1));
-
-        g3x_NormalVertex3dv(this, (n1 - 1) * n2 + j);
         g3x_NormalVertex3dv(this, min(j + step2, n2 - 1));
         g3x_NormalVertex3dv(this, j);
     }
