@@ -20,6 +20,10 @@ void applyRotation(Node *node, G3Xhmat rotation) {
 void applyHomothety3d(Node *node, double x, double y, double z) {
     if (node->instance != NULL) {
         node->instance->update_scale((Node *) node, x, y, z);
+    } else {
+        node->scaleFactor.x *= x;
+        node->scaleFactor.y *= y;
+        node->scaleFactor.z *= z;
     }
     applyTransformMatrix(node, g3x_Homothetie3d(x, y, z));
 }
@@ -27,6 +31,10 @@ void applyHomothety3d(Node *node, double x, double y, double z) {
 void applyHomothety1v(Node *node, G3Xvector homothety) {
     if (node->instance != NULL) {
         node->instance->update_scale((Node *) node, homothety.x, homothety.y, homothety.z);
+    } else {
+        node->scaleFactor.x *= homothety.x;
+        node->scaleFactor.y *= homothety.y;
+        node->scaleFactor.z *= homothety.z;
     }
     applyTransformMatrix(node, g3x_Homothetie1v(homothety));
 }
