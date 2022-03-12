@@ -86,24 +86,20 @@ Shape *createCone(int n1, int n2, int n3) {
     for (int i = 0; i < n1; i++) {
         for (int j = 0; j < n2; j++) {
             double t = j * (2. / (n2 - 1)) - 1;
-            cone->vertexes[i * n2 + j].x = (1 - t) / 2. * cos(i * theta);
-            cone->vertexes[i * n2 + j].y = (1 - t) / 2. * sin(i * theta);
-            cone->vertexes[i * n2 + j].z = t;
-            cone->normals[i * n2 + j].x = cos(i * theta);
-            cone->normals[i * n2 + j].y = sin(i * theta);
-            cone->normals[i * n2 + j].z = 1;
+            cone->vertexes[i * n2 + j] = (G3Xpoint) {(1 - t) / 2. * cos(i * theta),
+                                                     (1 - t) / 2. * sin(i * theta),
+                                                     t};
+            cone->normals[i * n2 + j] = (G3Xvector) {cos(i * theta), sin(i * theta), 1};
         }
     }
 
     int offset = n1 * n2;
     for (int i = 0; i < n1; i++) {
         for (int j = 0; j < n3; j++) {
-            cone->vertexes[offset + i * n3 + j].x = cos(i * theta) * j * (1. / (n3 - 1));
-            cone->vertexes[offset + i * n3 + j].y = sin(i * theta) * j * (1. / (n3 - 1));
-            cone->vertexes[offset + i * n3 + j].z = -1;
-            cone->normals[offset + i * n3 + j].x = 0;
-            cone->normals[offset + i * n3 + j].y = 0;
-            cone->normals[offset + i * n3 + j].z = -1;
+            cone->vertexes[offset + i * n3 + j] = (G3Xpoint) {cos(i * theta) * j * (1. / (n3 - 1)),
+                                                              sin(i * theta) * j * (1. / (n3 - 1)),
+                                                              -1};
+            cone->normals[offset + i * n3 + j] = (G3Xvector) {0, 0, -1};
         }
     }
 

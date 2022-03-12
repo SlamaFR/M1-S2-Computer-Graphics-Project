@@ -58,13 +58,12 @@ Shape *createTorus(int n1, int n2) {
 
     for (int i = 0; i < n1; i++) {
         for (int j = 0; j < n2; j++) {
-            torus->vertexes[i * n2 + j].x = cos(i * theta) * (1 + .5 * cos(j * phi));
-            torus->vertexes[i * n2 + j].y = -sin(i * theta) * (1 + .5 * cos(j * phi));
-            torus->vertexes[i * n2 + j].z = .5 * sin(j * phi);
-
-            torus->normals[i * n2 + j].x = cos(i * theta) * cos(j * phi);
-            torus->normals[i * n2 + j].y = -sin(i * theta) * cos(j * phi);
-            torus->normals[i * n2 + j].z = sin(j * phi);
+            torus->vertexes[i * n2 + j] = (G3Xpoint) {cos(i * theta) * (1 + .5 * cos(j * phi)),
+                                                      -sin(i * theta) * (1 + .5 * cos(j * phi)),
+                                                      .5 * sin(j * phi)};
+            torus->normals[i * n2 + j] = (G3Xvector) {cos(i * theta) * (1 + .5 * cos(j * phi)),
+                                                      -sin(i * theta) * (1 + .5 * cos(j * phi)),
+                                                      .5 * sin(j * phi)};
         }
     }
 

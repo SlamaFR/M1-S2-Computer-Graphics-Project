@@ -100,31 +100,23 @@ Shape *createCylinder(int n1, int n2, int n3) {
 
     for (int i = 0; i < n1; i++) {
         for (int j = 0; j < n2; j++) {
-            cylinder->vertexes[i * n2 + j].x = cos(i * theta);
-            cylinder->vertexes[i * n2 + j].y = sin(i * theta);
-            cylinder->vertexes[i * n2 + j].z = j * (2. / (n2 - 1)) - 1;
-            cylinder->normals[i * n2 + j].x = cos(i * theta);
-            cylinder->normals[i * n2 + j].y = sin(i * theta);
-            cylinder->normals[i * n2 + j].z = 0;
+            cylinder->vertexes[i * n2 + j] = (G3Xpoint) {cos(i * theta), sin(i * theta), j * (2. / (n2 - 1)) - 1};
+            cylinder->normals[i * n2 + j] = (G3Xvector) {cos(i * theta), sin(i * theta), 0};
         }
     }
 
     int offset = n1 * n2;
     for (int i = 0; i < n1; i++) {
         for (int j = 0; j < n3; j++) {
-            cylinder->vertexes[offset + i * n3 + j].x = cos(i * theta) * j * (1. / (n3 - 1));
-            cylinder->vertexes[offset + i * n3 + j].y = sin(i * theta) * j * (1. / (n3 - 1));
-            cylinder->vertexes[offset + i * n3 + j].z = 1;
-            cylinder->normals[offset + i * n3 + j].x = 0;
-            cylinder->normals[offset + i * n3 + j].y = 0;
-            cylinder->normals[offset + i * n3 + j].z = 1;
+            cylinder->vertexes[offset + i * n3 + j] = (G3Xpoint) {cos(i * theta) * j * (1. / (n3 - 1)),
+                                                                  sin(i * theta) * j * (1. / (n3 - 1)),
+                                                                  1};
+            cylinder->normals[offset + i * n3 + j] = (G3Xvector) {0, 0, 1};
 
-            cylinder->vertexes[offset + (n1 * n3) + i * n3 + j].x = cos(i * theta) * j * (1. / (n3 - 1));
-            cylinder->vertexes[offset + (n1 * n3) + i * n3 + j].y = sin(i * theta) * j * (1. / (n3 - 1));
-            cylinder->vertexes[offset + (n1 * n3) + i * n3 + j].z = -1;
-            cylinder->normals[offset + (n1 * n3) + i * n3 + j].x = 0;
-            cylinder->normals[offset + (n1 * n3) + i * n3 + j].y = 0;
-            cylinder->normals[offset + (n1 * n3) + i * n3 + j].z = -1;
+            cylinder->vertexes[offset + (n1 * n3) + i * n3 + j] = (G3Xpoint) {cos(i * theta) * j * (1. / (n3 - 1)),
+                                                                              sin(i * theta) * j * (1. / (n3 - 1)),
+                                                                              -1};
+            cylinder->normals[offset + (n1 * n3) + i * n3 + j] = (G3Xvector) {0, 0, -1};
         }
     }
 
