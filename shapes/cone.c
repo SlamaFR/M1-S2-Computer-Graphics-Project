@@ -50,13 +50,6 @@ void drawConeFaces(struct shape__s_ *this, G3Xvector scale) {
             g3x_NormalVertex3dv(this, offset + i * n3 + j);
         }
     }
-
-    for (int j = 0; j < n2 - 1; j += step2) {
-        g3x_NormalVertex3dv(this, min(j + step2, n2 - 1));
-        g3x_NormalVertex3dv(this, (n1 - 1) * n2 + min(j + step2, n2 - 1));
-        g3x_NormalVertex3dv(this, (n1 - 1) * n2 + j);
-        g3x_NormalVertex3dv(this, j);
-    }
     glEnd();
 
     glBegin(GL_TRIANGLES);
