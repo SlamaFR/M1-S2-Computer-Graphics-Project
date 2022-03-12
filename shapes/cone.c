@@ -1,5 +1,8 @@
+#include <math.h>
+
 #include "cone.h"
 #include "../utils.h"
+#include "../trees/node.h"
 
 void drawConePoints(struct shape__s_ *this, G3Xvector scale) {
     int n1 = this->n1;
@@ -65,6 +68,12 @@ void drawConeFaces(struct shape__s_ *this, G3Xvector scale) {
     glEnd();
 }
 
+void updateConeScale(void *node, double x, double y, double z) {
+    ((Node *) node)->scaleFactor.x *= fmin(fmax(x, y), 1);
+    ((Node *) node)->scaleFactor.y *= fmin(z, 1);
+    ((Node *) node)->scaleFactor.z *= fmin(fmax(x, y), 1);
+}
+
 Shape *createCone(int n1, int n2, int n3) {
     double theta = 2 * PI / (n1 - 1);
 
@@ -108,5 +117,6 @@ Shape *createCone(int n1, int n2, int n3) {
     cone->n3 = n3;
     cone->draw_faces = drawConeFaces;
     cone->draw_points = drawConePoints;
+    cone->update_scale = updateConeScale;
     return cone;
 }

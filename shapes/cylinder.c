@@ -1,5 +1,8 @@
+#include <math.h>
+
 #include "cylinder.h"
 #include "../utils.h"
+#include "../trees/node.h"
 
 void drawCylinderPoints(struct shape__s_ *this, G3Xvector scale) {
     int n1 = this->n1;
@@ -80,6 +83,12 @@ void drawCylinderFaces(struct shape__s_ *this, G3Xvector scale) {
     glEnd();
 }
 
+void updateCylinderScale(void *node, double x, double y, double z) {
+    ((Node *) node)->scaleFactor.x *= fmin(fmax(x, y), 1);
+    ((Node *) node)->scaleFactor.y *= fmin(z, 1);
+    ((Node *) node)->scaleFactor.z *= fmin(fmax(x, y), 1);
+}
+
 Shape *createCylinder(int n1, int n2, int n3) {
     double theta = 2 * PI / (n1 - 1);
 
@@ -125,5 +134,6 @@ Shape *createCylinder(int n1, int n2, int n3) {
     cylinder->n3 = n3;
     cylinder->draw_faces = drawCylinderFaces;
     cylinder->draw_points = drawCylinderPoints;
+    cylinder->update_scale = updateCylinderScale;
     return cylinder;
 }

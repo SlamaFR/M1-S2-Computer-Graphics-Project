@@ -1,5 +1,8 @@
+#include <math.h>
+
 #include "sphere.h"
 #include "../utils.h"
+#include "../trees/node.h"
 
 void drawSpherePoints(struct shape__s_ *this, G3Xvector scale) {
     int n1 = this->n1;
@@ -37,6 +40,11 @@ void drawSphereFaces(struct shape__s_ *this, G3Xvector scale) {
     glEnd();
 }
 
+void updateSphereScale(void *node, double x, double y, double z) {
+    ((Node *) node)->scaleFactor.x *= fmin(fmax(x, y), 1);
+    ((Node *) node)->scaleFactor.y *= fmin(fmax(fmax(x, y), z), 1);
+}
+
 Shape *createSphere(int n1, int n2) {
     double theta = 2 * PI / (n1 - 1);
     double phi = PI / (n2 - 1);
@@ -71,5 +79,6 @@ Shape *createSphere(int n1, int n2) {
     sphere->n2 = n2;
     sphere->draw_faces = drawSphereFaces;
     sphere->draw_points = drawSpherePoints;
+    sphere->update_scale = updateSphereScale;
     return sphere;
 }

@@ -1,8 +1,6 @@
 #include "sphere.h"
 #include "../utils.h"
-
-
-// []
+#include "../trees/node.h"
 
 void drawCubePoints(struct shape__s_ *this, G3Xvector scale) {
     int n1 = this->n1;
@@ -88,6 +86,12 @@ void drawCubeFaces(struct shape__s_ *this, G3Xvector scale) {
     glEnd();
 }
 
+void updateCubeScale(void *node, double x, double y, double z) {
+    ((Node *) node)->scaleFactor.x *= fmin(y, 1);
+    ((Node *) node)->scaleFactor.y *= fmin(x, 1);
+    ((Node *) node)->scaleFactor.z *= fmin(z, 1);
+}
+
 Shape *createCube(int n1) {
     Shape *cube;
     if ((cube = malloc(sizeof(Shape))) == NULL) {
@@ -132,5 +136,6 @@ Shape *createCube(int n1) {
     cube->n1 = n1;
     cube->draw_faces = drawCubeFaces;
     cube->draw_points = drawCubePoints;
+    cube->update_scale = updateCubeScale;
     return cube;
 }

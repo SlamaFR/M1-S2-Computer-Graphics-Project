@@ -1,5 +1,8 @@
+#include <math.h>
+
 #include "torus.h"
 #include "../utils.h"
+#include "../trees/node.h"
 
 void drawTorusPoints(struct shape__s_ *this, G3Xvector scale) {
     int n1 = this->n1;
@@ -37,6 +40,11 @@ void drawTorusFaces(struct shape__s_ *this, G3Xvector scale) {
     glEnd();
 }
 
+void updateTorusScale(void *node, double x, double y, double z) {
+    ((Node *) node)->scaleFactor.x *= fmin(fmax(x, y), 1);
+    ((Node *) node)->scaleFactor.y *= fmin(fmax(fmax(x, y), z), 1);
+}
+
 Shape *createTorus(int n1, int n2) {
     double theta = 2 * PI / (n1 - 1);
     double phi = 2 * PI / (n2 - 1);
@@ -61,9 +69,9 @@ Shape *createTorus(int n1, int n2) {
             torus->vertexes[i * n2 + j] = (G3Xpoint) {cos(i * theta) * (1 + .5 * cos(j * phi)),
                                                       -sin(i * theta) * (1 + .5 * cos(j * phi)),
                                                       .5 * sin(j * phi)};
-            torus->normals[i * n2 + j] = (G3Xvector) {cos(i * theta) * (1 + .5 * cos(j * phi)),
-                                                      -sin(i * theta) * (1 + .5 * cos(j * phi)),
-                                                      .5 * sin(j * phi)};
+            torus->normals[i * n2 + j] = (G3Xvector) {cos(i * theta) * cos(j * phi),
+                                                      -sin(i * theta) * cos(j * phi),
+                                                      sin(j * phi)};
         }
     }
 
@@ -71,5 +79,6 @@ Shape *createTorus(int n1, int n2) {
     torus->n2 = n2;
     torus->draw_faces = drawTorusFaces;
     torus->draw_points = drawTorusPoints;
+    torus->update_scale = updateTorusScale;
     return torus;
 }
