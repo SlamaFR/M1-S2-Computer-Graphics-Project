@@ -10,6 +10,7 @@ set(CMAKE_C_FLAGS "-lm -L$ENV{lGL_PATH} -framework OpenGL -framework GLUT -L$ENV
 # or the automatic version
 file(GLOB_RECURSE SRC_FILES *.c)
 file(GLOB_RECURSE SRC_SHAPES shapes/*.c)
+file(GLOB_RECURSE SRC_SHAPES trees/*.c)
 
 # for each sample file, make an exe
 add_executable(project ${SRC_FILES} ${SRC_SHAPES})
