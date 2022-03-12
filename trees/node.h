@@ -17,17 +17,17 @@ typedef struct node__s_ {
     Shape *instance;
 } Node, *SceneTree;
 
-void applyTranslation3d(Node *node, double x, double y, double z);
+Node *applyTranslation3d(Node *node, double x, double y, double z);
 
-void applyTranslation1v(Node *node, G3Xvector vector);
+Node *applyTranslation1v(Node *node, G3Xvector vector);
 
-void applyRotation(Node *node, G3Xhmat rotation);
+Node *applyRotation(Node *node, G3Xhmat rotation);
 
-void applyHomothety3d(Node *node, double x, double y, double z);
+Node *applyHomothety3d(Node *node, double x, double y, double z);
 
-void applyHomothety1v(Node *node, G3Xvector homothety);
+Node *applyHomothety1v(Node *node, G3Xvector homothety);
 
-void applyTransformMatrix(Node *node, G3Xhmat matrix);
+Node *applyTransformMatrix(Node *node, G3Xhmat matrix);
 
 void addSibling(Node *node, Node *sibling);
 
