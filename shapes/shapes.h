@@ -7,9 +7,11 @@ typedef struct shape__s_ {
     G3Xpoint *vertexes;
     G3Xvector *normals;
 
-    void (*draw_points)(struct shape__s_ *, G3Xvector scale_factor);
+    void (*drawPoints)(struct shape__s_ *, G3Xvector scale_factor);
 
-    void (*draw_faces)(struct shape__s_ *, G3Xvector scale_factor);
+    void (*drawFaces)(struct shape__s_ *, G3Xvector scale_factor);
 
-    void (*update_scale)(void *, double x, double y, double z);
+    void (*updateScale)(void *, double x, double y, double z);
+
+    G3Xvector (*applyScale3d)(void *, double x, double y, double z);
 } Shape;

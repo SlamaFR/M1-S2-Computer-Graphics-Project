@@ -89,6 +89,14 @@ void updateCylinderScale(void *node, double x, double y, double z) {
     ((Node *) node)->scaleFactor.z *= fmin(fmax(x, y), 1);
 }
 
+G3Xvector applyCylinderScale(void *node, double x, double y, double z) {
+    return (G3Xvector) {
+        x / ((Node *) node)->scaleFactor.x,
+        y / ((Node *) node)->scaleFactor.x,
+        z / ((Node *) node)->scaleFactor.y
+    };
+}
+
 Shape *createCylinder(int n1, int n2, int n3) {
     double theta = 2 * PI / (n1 - 1);
 
@@ -132,8 +140,9 @@ Shape *createCylinder(int n1, int n2, int n3) {
     cylinder->n1 = n1;
     cylinder->n2 = n2;
     cylinder->n3 = n3;
-    cylinder->draw_faces = drawCylinderFaces;
-    cylinder->draw_points = drawCylinderPoints;
-    cylinder->update_scale = updateCylinderScale;
+    cylinder->drawFaces = drawCylinderFaces;
+    cylinder->drawPoints = drawCylinderPoints;
+    cylinder->updateScale = updateCylinderScale;
+    cylinder->applyScale3d = applyCylinderScale;
     return cylinder;
 }

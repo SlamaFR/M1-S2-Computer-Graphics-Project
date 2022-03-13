@@ -4,7 +4,7 @@
 void propagateScale(Node *node, double x, double y, double z) {
     if (node == NULL) return;
     if (node->instance != NULL) {
-        node->instance->update_scale((Node *) node, x, y, z);
+        node->instance->updateScale((Node *) node, x, y, z);
     } else {
         node->scaleFactor.x *= x;
         node->scaleFactor.y *= y;
@@ -24,10 +24,14 @@ Node *applyTransformMatrix(Node *node, G3Xhmat matrix) {
 }
 
 Node *applyTranslation3d(Node *node, double x, double y, double z) {
-    double dx = x / node->scaleFactor.x;
-    double dy = y / node->scaleFactor.y;
-    double dz = z / node->scaleFactor.z;
-    applyTransformMatrix(node, g3x_Translation3d(dx, dy, dz));
+    if (node->instance != NULL) {
+        applyTransformMatrix(node, g3x_Translation1v(node->instance->applyScale3d(node, x, y, z)));
+    } else {
+        double dx = x / node->scaleFactor.x;
+        double dy = y / node->scaleFactor.y;
+        double dz = z / node->scaleFactor.z;
+        applyTransformMatrix(node, g3x_Translation3d(dx, dy, dz));
+    }
     return node;
 }
 
@@ -45,9 +49,9 @@ Node *applyRotation(Node *node, G3Xhmat rotation) {
 }
 
 Node *applyHomothety3d(Node *node, double x, double y, double z) {
-    double dx = x / node->scaleFactor.x;
-    double dy = y / node->scaleFactor.y;
-    double dz = z / node->scaleFactor.z;
+    double dx = x;// / node->scaleFactor.x;
+    double dy = y;// / node->scaleFactor.y;
+    double dz = z;// / node->scaleFactor.z;
     propagateScale(node, x, y, z);
     applyTransformMatrix(node, g3x_Homothetie3d(dx, dy, dz));
     return node;

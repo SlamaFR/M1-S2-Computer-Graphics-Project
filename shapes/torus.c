@@ -45,6 +45,14 @@ void updateTorusScale(void *node, double x, double y, double z) {
     ((Node *) node)->scaleFactor.y *= fmin(fmax(fmax(x, y), z), 1);
 }
 
+G3Xvector applyTorusScale(void *node, double x, double y, double z) {
+    return (G3Xvector) {
+            x / ((Node *) node)->scaleFactor.x,
+            y / ((Node *) node)->scaleFactor.x,
+            z / ((Node *) node)->scaleFactor.y
+    };
+}
+
 Shape *createTorus(int n1, int n2) {
     double theta = 2 * PI / (n1 - 1);
     double phi = 2 * PI / (n2 - 1);
@@ -77,8 +85,9 @@ Shape *createTorus(int n1, int n2) {
 
     torus->n1 = n1;
     torus->n2 = n2;
-    torus->draw_faces = drawTorusFaces;
-    torus->draw_points = drawTorusPoints;
-    torus->update_scale = updateTorusScale;
+    torus->drawFaces = drawTorusFaces;
+    torus->drawPoints = drawTorusPoints;
+    torus->updateScale = updateTorusScale;
+    torus->applyScale3d = applyTorusScale;
     return torus;
 }

@@ -45,6 +45,14 @@ void updateSphereScale(void *node, double x, double y, double z) {
     ((Node *) node)->scaleFactor.y *= fmin(fmax(fmax(x, y), z), 1);
 }
 
+G3Xvector applySphereScale(void *node, double x, double y, double z) {
+    return (G3Xvector) {
+            x / ((Node *) node)->scaleFactor.x,
+            y / ((Node *) node)->scaleFactor.x,
+            z / ((Node *) node)->scaleFactor.y
+    };
+}
+
 Shape *createSphere(int n1, int n2) {
     double theta = 2 * PI / (n1 - 1);
     double phi = PI / (n2 - 1);
@@ -77,8 +85,9 @@ Shape *createSphere(int n1, int n2) {
 
     sphere->n1 = n1;
     sphere->n2 = n2;
-    sphere->draw_faces = drawSphereFaces;
-    sphere->draw_points = drawSpherePoints;
-    sphere->update_scale = updateSphereScale;
+    sphere->drawFaces = drawSphereFaces;
+    sphere->drawPoints = drawSpherePoints;
+    sphere->updateScale = updateSphereScale;
+    sphere->applyScale3d = applySphereScale;
     return sphere;
 }
