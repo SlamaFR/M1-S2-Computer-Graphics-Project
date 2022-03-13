@@ -93,7 +93,7 @@ G3Xvector applyCylinderScale(void *node, double x, double y, double z) {
     return (G3Xvector) {
         x / ((Node *) node)->scaleFactor.x,
         y / ((Node *) node)->scaleFactor.x,
-        z / ((Node *) node)->scaleFactor.y
+        z
     };
 }
 

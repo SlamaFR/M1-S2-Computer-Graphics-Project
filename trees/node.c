@@ -41,11 +41,8 @@ Node *applyRotation(Node *node, G3Xhmat rotation) {
 }
 
 Node *applyHomothety3d(Node *node, double x, double y, double z) {
-    double dx = x;// / node->scaleFactor.x;
-    double dy = y;// / node->scaleFactor.y;
-    double dz = z;// / node->scaleFactor.z;
     propagateScale(node, x, y, z);
-    applyTransformMatrix(node, g3x_Homothetie3d(dx, dy, dz));
+    applyTransformMatrix(node, g3x_Homothetie3d(x, y, z));
     return node;
 }
 

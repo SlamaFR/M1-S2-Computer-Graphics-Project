@@ -43,43 +43,43 @@ void drawCubeFaces(struct shape__s_ *this, G3Xvector scale) {
 
     glBegin(GL_QUADS);
     for (int i = 0; i < n1 - 1; i += step2) {
-        for (int j = 0; j < n1 - 1; j += step1) {
+        for (int j = 0; j < n1 - 1; j += step3) {
             g3x_NormalVertex3dv(this, min(i + step2, n1 - 1) * n1 + j);
-            g3x_NormalVertex3dv(this, min(i + step2, n1 - 1) * n1 + min(j + step1, n1 - 1));
-            g3x_NormalVertex3dv(this, i * n1 + min(j + step1, n1 - 1));
+            g3x_NormalVertex3dv(this, min(i + step2, n1 - 1) * n1 + min(j + step3, n1 - 1));
+            g3x_NormalVertex3dv(this, i * n1 + min(j + step3, n1 - 1));
             g3x_NormalVertex3dv(this, i * n1 + j);
 
             g3x_NormalVertex3dv(this, offset + i * n1 + j);
-            g3x_NormalVertex3dv(this, offset + i * n1 + min(j + step1, n1 - 1));
-            g3x_NormalVertex3dv(this, offset + min(i + step2, n1 - 1) * n1 + min(j + step1, n1 - 1));
+            g3x_NormalVertex3dv(this, offset + i * n1 + min(j + step3, n1 - 1));
+            g3x_NormalVertex3dv(this, offset + min(i + step2, n1 - 1) * n1 + min(j + step3, n1 - 1));
             g3x_NormalVertex3dv(this, offset + min(i + step2, n1 - 1) * n1 + j);
         }
     }
 
-    for (int i = 0; i < n1 - 1; i += step2) {
+    for (int i = 0; i < n1 - 1; i += step1) {
         for (int j = 0; j < n1 - 1; j += step3) {
             g3x_NormalVertex3dv(this, (2 * offset) + i * n1 + j);
             g3x_NormalVertex3dv(this, (2 * offset) + i * n1 + min(j + step3, n1 - 1));
-            g3x_NormalVertex3dv(this, (2 * offset) + min(i + step2, n1 - 1) * n1 + min(j + step3, n1 - 1));
-            g3x_NormalVertex3dv(this, (2 * offset) + min(i + step2, n1 - 1) * n1 + j);
+            g3x_NormalVertex3dv(this, (2 * offset) + min(i + step1, n1 - 1) * n1 + min(j + step3, n1 - 1));
+            g3x_NormalVertex3dv(this, (2 * offset) + min(i + step1, n1 - 1) * n1 + j);
 
-            g3x_NormalVertex3dv(this, (3 * offset) + min(i + step2, n1 - 1) * n1 + j);
-            g3x_NormalVertex3dv(this, (3 * offset) + min(i + step2, n1 - 1) * n1 + min(j + step3, n1 - 1));
+            g3x_NormalVertex3dv(this, (3 * offset) + min(i + step1, n1 - 1) * n1 + j);
+            g3x_NormalVertex3dv(this, (3 * offset) + min(i + step1, n1 - 1) * n1 + min(j + step3, n1 - 1));
             g3x_NormalVertex3dv(this, (3 * offset) + i * n1 + min(j + step3, n1 - 1));
             g3x_NormalVertex3dv(this, (3 * offset) + i * n1 + j);
         }
     }
 
     for (int i = 0; i < n1 - 1; i += step1) {
-        for (int j = 0; j < n1 - 1; j += step3) {
+        for (int j = 0; j < n1 - 1; j += step2) {
             g3x_NormalVertex3dv(this, (4 * offset) + min(i + step1, n1 - 1) * n1 + j);
-            g3x_NormalVertex3dv(this, (4 * offset) + min(i + step1, n1 - 1) * n1 + min(j + step3, n1 - 1));
-            g3x_NormalVertex3dv(this, (4 * offset) + i * n1 + min(j + step3, n1 - 1));
+            g3x_NormalVertex3dv(this, (4 * offset) + min(i + step1, n1 - 1) * n1 + min(j + step2, n1 - 1));
+            g3x_NormalVertex3dv(this, (4 * offset) + i * n1 + min(j + step2, n1 - 1));
             g3x_NormalVertex3dv(this, (4 * offset) + i * n1 + j);
 
             g3x_NormalVertex3dv(this, (5 * offset) + i * n1 + j);
-            g3x_NormalVertex3dv(this, (5 * offset) + i * n1 + min(j + step3, n1 - 1));
-            g3x_NormalVertex3dv(this, (5 * offset) + min(i + step1, n1 - 1) * n1 + min(j + step3, n1 - 1));
+            g3x_NormalVertex3dv(this, (5 * offset) + i * n1 + min(j + step2, n1 - 1));
+            g3x_NormalVertex3dv(this, (5 * offset) + min(i + step1, n1 - 1) * n1 + min(j + step2, n1 - 1));
             g3x_NormalVertex3dv(this, (5 * offset) + min(i + step1, n1 - 1) * n1 + j);
         }
     }
@@ -87,8 +87,8 @@ void drawCubeFaces(struct shape__s_ *this, G3Xvector scale) {
 }
 
 void updateCubeScale(void *node, double x, double y, double z) {
-    ((Node *) node)->scaleFactor.x *= fmin(y, 1);
-    ((Node *) node)->scaleFactor.y *= fmin(x, 1);
+    ((Node *) node)->scaleFactor.x *= fmin(x, 1);
+    ((Node *) node)->scaleFactor.y *= fmin(y, 1);
     ((Node *) node)->scaleFactor.z *= fmin(z, 1);
 }
 
@@ -121,11 +121,11 @@ Shape *createCube(int n1) {
 
     for (int i = 0; i < n1; i++) {
         for (int j = 0; j < n1; j++) {
-            // Z axis
-            cube->vertexes[i * n1 + j] = (G3Xpoint) {i * d - 1, j * d - 1, 1};
-            cube->normals[i * n1 + j] = (G3Xvector) {0, 0, 1};
-            cube->vertexes[offset + i * n1 + j] = (G3Xpoint) {i * d - 1, j * d - 1, -1};
-            cube->normals[offset + i * n1 + j] = (G3Xvector) {0, 0, -1};
+            // X axis
+            cube->vertexes[i * n1 + j] = (G3Xpoint) {1, i * d - 1, j * d - 1};
+            cube->normals[i * n1 + j] = (G3Xvector) {1, 0, 0};
+            cube->vertexes[offset + i * n1 + j] = (G3Xpoint) {-1, i * d - 1, j * d - 1};
+            cube->normals[offset + i * n1 + j] = (G3Xvector) {-1, 0, 0};
 
             // Y axis
             cube->vertexes[(2 * offset) + i * n1 + j] = (G3Xpoint) {i * d - 1, 1, j * d - 1};
@@ -133,11 +133,11 @@ Shape *createCube(int n1) {
             cube->vertexes[(3 * offset) + i * n1 + j] = (G3Xpoint) {i * d - 1, -1, j * d - 1};
             cube->normals[(3 * offset) + i * n1 + j] = (G3Xvector) {0, -1, 0};
 
-            // X axis
-            cube->vertexes[(4 * offset) + i * n1 + j] = (G3Xpoint) {1, i * d - 1, j * d - 1};
-            cube->normals[(4 * offset) + i * n1 + j] = (G3Xvector) {1, 0, 0};
-            cube->vertexes[(5 * offset) + i * n1 + j] = (G3Xpoint) {-1, i * d - 1, j * d - 1};
-            cube->normals[(5 * offset) + i * n1 + j] = (G3Xvector) {-1, 0, 0};
+            // Z axis
+            cube->vertexes[(4 * offset) + i * n1 + j] = (G3Xpoint) {i * d - 1, j * d - 1, 1};
+            cube->normals[(4 * offset) + i * n1 + j] = (G3Xvector) {0, 0, 1};
+            cube->vertexes[(5 * offset) + i * n1 + j] = (G3Xpoint) {i * d - 1, j * d - 1, -1};
+            cube->normals[(5 * offset) + i * n1 + j] = (G3Xvector) {0, 0, -1};
         }
     }
 
