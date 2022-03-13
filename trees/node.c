@@ -35,14 +35,6 @@ Node *applyTranslation3d(Node *node, double x, double y, double z) {
     return node;
 }
 
-Node *applyTranslation1v(Node *node, G3Xvector vector) {
-    double dx = vector.x / node->scaleFactor.x;
-    double dy = vector.y / node->scaleFactor.y;
-    double dz = vector.z / node->scaleFactor.z;
-    applyTransformMatrix(node, g3x_Translation1v((G3Xvector) {dx, dy, dz}));
-    return node;
-}
-
 Node *applyRotation(Node *node, G3Xhmat rotation) {
     applyTransformMatrix(node, rotation);
     return node;
@@ -54,15 +46,6 @@ Node *applyHomothety3d(Node *node, double x, double y, double z) {
     double dz = z;// / node->scaleFactor.z;
     propagateScale(node, x, y, z);
     applyTransformMatrix(node, g3x_Homothetie3d(dx, dy, dz));
-    return node;
-}
-
-Node *applyHomothety1v(Node *node, G3Xvector homothety) {
-    double dx = homothety.x / node->scaleFactor.x;
-    double dy = homothety.y / node->scaleFactor.y;
-    double dz = homothety.z / node->scaleFactor.z;
-    propagateScale(node, homothety.x, homothety.y, homothety.z);
-    applyTransformMatrix(node, g3x_Homothetie1v((G3Xvector) {dx, dy, dz}));
     return node;
 }
 
@@ -87,7 +70,7 @@ void addChild(Node *node, Node *child) {
     if (node->child == NULL) {
         node->child = child;
     } else {
-        addSibling(node, child);
+        addSibling(node->child, child);
     }
     inheritProperties(node, child);
 }

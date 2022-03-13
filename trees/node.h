@@ -19,13 +19,9 @@ typedef struct node__s_ {
 
 Node *applyTranslation3d(Node *node, double x, double y, double z);
 
-Node *applyTranslation1v(Node *node, G3Xvector vector);
-
 Node *applyRotation(Node *node, G3Xhmat rotation);
 
 Node *applyHomothety3d(Node *node, double x, double y, double z);
-
-Node *applyHomothety1v(Node *node, G3Xvector homothety);
 
 Node *applyTransformMatrix(Node *node, G3Xhmat matrix);
 
