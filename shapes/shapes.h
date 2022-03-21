@@ -2,6 +2,9 @@
 
 #include <g3x.h>
 
+
+#define MAXRES 100 /* Maximum subdivisions amount */
+
 typedef struct shape__s_ {
     int n1, n2, n3;
     G3Xpoint *vertexes;

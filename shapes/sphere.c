@@ -41,8 +41,8 @@ void drawSphereFaces(struct shape__s_ *this, G3Xvector scale) {
 }
 
 void updateSphereScale(void *node, double x, double y, double z) {
-    ((Node *) node)->scaleFactor.x *= fmin(fmax(x, y), 1);
-    ((Node *) node)->scaleFactor.y *= fmin(fmax(fmax(x, y), z), 1);
+    ((Node *) node)->scaleFactor.x *= fmax(x, y);
+    ((Node *) node)->scaleFactor.y *= fmax(fmax(x, y), z);
 }
 
 G3Xvector applySphereScale(void *node, double x, double y, double z) {

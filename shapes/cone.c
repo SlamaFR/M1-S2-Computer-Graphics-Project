@@ -69,9 +69,9 @@ void drawConeFaces(struct shape__s_ *this, G3Xvector scale) {
 }
 
 void updateConeScale(void *node, double x, double y, double z) {
-    ((Node *) node)->scaleFactor.x *= fmin(fmax(x, y), 1);
-    ((Node *) node)->scaleFactor.y *= fmin(z, 1);
-    ((Node *) node)->scaleFactor.z *= fmin(fmax(x, y), 1);
+    ((Node *) node)->scaleFactor.x *= fmax(x, y);
+    ((Node *) node)->scaleFactor.y *= z;
+    ((Node *) node)->scaleFactor.z *= fmax(x, y);
 }
 
 G3Xvector applyConeScale(void *node, double x, double y, double z) {

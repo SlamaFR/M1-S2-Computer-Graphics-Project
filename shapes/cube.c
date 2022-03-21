@@ -87,9 +87,9 @@ void drawCubeFaces(struct shape__s_ *this, G3Xvector scale) {
 }
 
 void updateCubeScale(void *node, double x, double y, double z) {
-    ((Node *) node)->scaleFactor.x *= fmin(x, 1);
-    ((Node *) node)->scaleFactor.y *= fmin(y, 1);
-    ((Node *) node)->scaleFactor.z *= fmin(z, 1);
+    ((Node *) node)->scaleFactor.x *= x;
+    ((Node *) node)->scaleFactor.y *= y;
+    ((Node *) node)->scaleFactor.z *= z;
 }
 
 G3Xvector applyCubeScale(void *node, double x, double y, double z) {
