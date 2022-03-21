@@ -92,14 +92,6 @@ void updateCubeScale(void *node, double x, double y, double z) {
     ((Node *) node)->scaleFactor.z *= z;
 }
 
-G3Xvector applyCubeScale(void *node, double x, double y, double z) {
-    return (G3Xvector) {
-            x / ((Node *) node)->scaleFactor.x,
-            y / ((Node *) node)->scaleFactor.y,
-            z / ((Node *) node)->scaleFactor.z
-    };
-}
-
 Shape *createCube(int n1) {
     Shape *cube;
     if ((cube = malloc(sizeof(Shape))) == NULL) {
@@ -145,6 +137,5 @@ Shape *createCube(int n1) {
     cube->drawFaces = drawCubeFaces;
     cube->drawPoints = drawCubePoints;
     cube->updateScale = updateCubeScale;
-    cube->applyScale3d = applyCubeScale;
     return cube;
 }

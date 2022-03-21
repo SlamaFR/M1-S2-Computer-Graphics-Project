@@ -74,14 +74,6 @@ void updateConeScale(void *node, double x, double y, double z) {
     ((Node *) node)->scaleFactor.z *= fmax(x, y);
 }
 
-G3Xvector applyConeScale(void *node, double x, double y, double z) {
-    return (G3Xvector) {
-            x / ((Node *) node)->scaleFactor.x,
-            y / ((Node *) node)->scaleFactor.x,
-            z
-    };
-}
-
 Shape *createCone(int n1, int n2, int n3) {
     double theta = 2 * PI / (n1 - 1);
 
@@ -126,6 +118,5 @@ Shape *createCone(int n1, int n2, int n3) {
     cone->drawFaces = drawConeFaces;
     cone->drawPoints = drawConePoints;
     cone->updateScale = updateConeScale;
-    cone->applyScale3d = applyConeScale;
     return cone;
 }

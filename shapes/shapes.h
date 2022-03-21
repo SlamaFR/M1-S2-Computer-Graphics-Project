@@ -15,6 +15,4 @@ typedef struct shape__s_ {
     void (*drawFaces)(struct shape__s_ *, G3Xvector scale_factor);
 
     void (*updateScale)(void *, double x, double y, double z);
-
-    G3Xvector (*applyScale3d)(void *, double x, double y, double z);
 } Shape;
