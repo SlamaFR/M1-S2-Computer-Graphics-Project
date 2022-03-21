@@ -117,14 +117,18 @@ Shape *createCylinder(int n1, int n2, int n3) {
     int offset = n1 * n2;
     for (int i = 0; i < n1; i++) {
         for (int j = 0; j < n3; j++) {
-            cylinder->vertexes[offset + i * n3 + j] = (G3Xpoint) {cos(i * theta) * j * (1. / (n3 - 1)),
-                                                                  sin(i * theta) * j * (1. / (n3 - 1)),
-                                                                  1};
+            cylinder->vertexes[offset + i * n3 + j] = (G3Xpoint) {
+                    cos(i * theta) * j * (1. / (n3 - 1)),
+                    sin(i * theta) * j * (1. / (n3 - 1)),
+                    1
+            };
             cylinder->normals[offset + i * n3 + j] = (G3Xvector) {0, 0, 1};
 
-            cylinder->vertexes[offset + (n1 * n3) + i * n3 + j] = (G3Xpoint) {cos(i * theta) * j * (1. / (n3 - 1)),
-                                                                              sin(i * theta) * j * (1. / (n3 - 1)),
-                                                                              -1};
+            cylinder->vertexes[offset + (n1 * n3) + i * n3 + j] = (G3Xpoint) {
+                    cos(i * theta) * j * (1. / (n3 - 1)),
+                    sin(i * theta) * j * (1. / (n3 - 1)),
+                    -1
+            };
             cylinder->normals[offset + (n1 * n3) + i * n3 + j] = (G3Xvector) {0, 0, -1};
         }
     }

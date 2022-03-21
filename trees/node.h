@@ -34,4 +34,3 @@ SceneTree createRoot(Material material, G3Xcolor color, G3Xhmat transformMatrix,
 Node *createNode();
 
 Node *createLeaf(Shape *shape);
-

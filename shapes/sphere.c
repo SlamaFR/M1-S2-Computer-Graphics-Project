@@ -66,12 +66,16 @@ Shape *createSphere(int n1, int n2) {
 
     for (int i = 0; i < n1; i++) {
         for (int j = 0; j < n2; j++) {
-            sphere->vertexes[i * n2 + j] = (G3Xpoint) {cos(i * theta) * sin(j * phi),
-                                                       sin(i * theta) * sin(j * phi),
-                                                       cos(j * phi)};
-            sphere->normals[i * n2 + j] = (G3Xvector) {cos(i * theta) * sin(j * phi),
-                                                       sin(i * theta) * sin(j * phi),
-                                                       cos(j * phi)};
+            sphere->vertexes[i * n2 + j] = (G3Xpoint) {
+                    cos(i * theta) * sin(j * phi),
+                    sin(i * theta) * sin(j * phi),
+                    cos(j * phi)
+            };
+            sphere->normals[i * n2 + j] = (G3Xvector) {
+                    cos(i * theta) * sin(j * phi),
+                    sin(i * theta) * sin(j * phi),
+                    cos(j * phi)
+            };
         }
     }
 
