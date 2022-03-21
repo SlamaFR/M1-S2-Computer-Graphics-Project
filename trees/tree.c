@@ -17,10 +17,11 @@ void drawTree(SceneTree tree) {
         G3Xpoint camPos = {0, 0, 0};
 
         // Weighted scale factor accordingly to distance to camera.
+        double adaptedResolution = fmin(1., 1. / g3x_Dist(camPos, shapePos));
         G3Xvector scaleFactor = {
-                fmin(1., 5. / g3x_Dist(camPos, shapePos)) * tree->scaleFactor.x,
-                fmin(1., 5. / g3x_Dist(camPos, shapePos)) * tree->scaleFactor.y,
-                fmin(1., 5. / g3x_Dist(camPos, shapePos)) * tree->scaleFactor.z
+                tree->scaleFactor.x * adaptedResolution,
+                tree->scaleFactor.y * adaptedResolution,
+                tree->scaleFactor.z * adaptedResolution
         };
 
         // Drawing shape with adapted scale factor.

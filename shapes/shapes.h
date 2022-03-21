@@ -3,7 +3,7 @@
 #include <g3x.h>
 
 
-#define MAXRES 100 /* Maximum subdivisions amount */
+#define MAXRES 500 /* Maximum subdivisions amount */
 
 typedef struct shape__s_ {
     int n1, n2, n3;

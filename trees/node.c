@@ -24,14 +24,7 @@ Node *applyTransformMatrix(Node *node, G3Xhmat matrix) {
 }
 
 Node *applyTranslation3d(Node *node, double x, double y, double z) {
-    if (node->instance != NULL) {
-        applyTransformMatrix(node, g3x_Translation1v(node->instance->applyScale3d(node, x, y, z)));
-    } else {
-        double dx = x / node->scaleFactor.x;
-        double dy = y / node->scaleFactor.y;
-        double dz = z / node->scaleFactor.z;
-        applyTransformMatrix(node, g3x_Translation3d(dx, dy, dz));
-    }
+    applyTransformMatrix(node, g3x_Translation3d(x, y, z));
     return node;
 }
 
