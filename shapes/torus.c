@@ -53,7 +53,7 @@ G3Xvector applyTorusScale(void *node, double x, double y, double z) {
     };
 }
 
-Shape *createTorus(int n1, int n2) {
+Shape *createTorus(int n1, int n2, double r1, double r2) {
     double theta = 2 * PI / (n1 - 1);
     double phi = 2 * PI / (n2 - 1);
     Shape *torus;
@@ -74,9 +74,9 @@ Shape *createTorus(int n1, int n2) {
 
     for (int i = 0; i < n1; i++) {
         for (int j = 0; j < n2; j++) {
-            torus->vertexes[i * n2 + j] = (G3Xpoint) {cos(i * theta) * (1 + .5 * cos(j * phi)),
-                                                      -sin(i * theta) * (1 + .5 * cos(j * phi)),
-                                                      .5 * sin(j * phi)};
+            torus->vertexes[i * n2 + j] = (G3Xpoint) {cos(i * theta) * ((r1 + r2) + r2 * cos(j * phi)),
+                                                      -sin(i * theta) * ((r1 + r2) + r2 * cos(j * phi)),
+                                                      r2 * sin(j * phi)};
             torus->normals[i * n2 + j] = (G3Xvector) {cos(i * theta) * cos(j * phi),
                                                       -sin(i * theta) * cos(j * phi),
                                                       sin(j * phi)};
