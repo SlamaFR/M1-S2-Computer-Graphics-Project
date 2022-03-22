@@ -3,6 +3,8 @@
 #include <g3x.h>
 #include "shapes/shapes.h"
 
+#define assertThat(e) for(; !(e); assert(e))
+
 int min(int a, int b);
 
 int max(int a, int b);

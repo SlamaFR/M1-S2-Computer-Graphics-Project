@@ -4,6 +4,7 @@
 
 #include "pillarsway.h"
 #include "../shapes/torus.h"
+#include "../utils.h"
 
 extern Shape *sphere;
 extern Shape *cylinder;
@@ -13,14 +14,18 @@ static Shape *torus;
 static int initialized = 0;
 
 void initPillarsWay() {
-    assert(!initialized);
+    assertThat(!initialized) {
+        fprintf(stderr, "Pillars way scene is already initialized\n");
+    }
     torus = createTorus((3 * PI / 2) * MAXRES, PI * MAXRES / 2, 1., .25);
     sranddev();
     initialized = 1;
 }
 
 SceneTree getSpinningTop(Material mat) {
-    assert(initialized);
+    assertThat(initialized) {
+        fprintf(stderr, "Pillars way scene is not initialized\n");
+    }
     SceneTree st = createNode();
     memcpy(st->material, mat, 4 * sizeof(float));
     st->color = G3Xwb;
