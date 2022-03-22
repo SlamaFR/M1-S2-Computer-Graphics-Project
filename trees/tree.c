@@ -31,3 +31,17 @@ void drawTree(SceneTree tree) {
     glPopMatrix();
     drawTree(tree->sibling);
 }
+
+void freeTree(SceneTree *tree) {
+    if (tree == NULL || *tree == NULL) {
+        return;
+    }
+    if ((*tree)->sibling != NULL) {
+        freeTree(&(*tree)->sibling);
+    }
+    if ((*tree)->child != NULL) {
+        freeTree(&(*tree)->child);
+    }
+    free(*tree);
+    *tree = NULL;
+}

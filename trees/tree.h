@@ -10,3 +10,5 @@
  * than closest ones.
  */
 void drawTree(SceneTree tree);
+
+void freeTree(SceneTree *tree);

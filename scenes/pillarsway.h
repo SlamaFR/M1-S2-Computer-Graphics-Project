@@ -4,6 +4,8 @@
 
 void initPillarsWay();
 
+void freePillarsWay();
+
 SceneTree getSpinningTop(Material mat);
 
 SceneTree getRandomPillar(Material mat);

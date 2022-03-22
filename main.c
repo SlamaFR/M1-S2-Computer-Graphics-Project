@@ -63,6 +63,13 @@ static void anim(void) {
 
 /* la fonction de sortie  (facultatif) -- atexit() */
 static void quit(void) {
+    freeShape(&sphere);
+    freeShape(&cone);
+    freeShape(&torus);
+    freeShape(&cylinder);
+    freeShape(&cube);
+    freeTree(&scene);
+    freePillarsWay();
 }
 
 /***************************************************************************/

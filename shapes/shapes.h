@@ -16,3 +16,5 @@ typedef struct shape__s_ {
 
     void (*updateScale)(void *, double x, double y, double z);
 } Shape;
+
+void freeShape(Shape **shape);

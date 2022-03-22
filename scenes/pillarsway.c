@@ -22,6 +22,14 @@ void initPillarsWay() {
     initialized = 1;
 }
 
+void freePillarsWay() {
+    assertThat(initialized) {
+        fprintf(stderr, "Pillars way scene is already initialized\n");
+    }
+    freeShape(&torus);
+    initialized = 0;
+}
+
 SceneTree getSpinningTop(Material mat) {
     assertThat(initialized) {
         fprintf(stderr, "Pillars way scene is not initialized\n");
