@@ -55,16 +55,16 @@ Shape *createTorus(int n1, int n2, double r1, double r2) {
 
     if ((torus = malloc(sizeof(Shape))) == NULL) {
         fprintf(stderr, "Failed to allocate memory for torus\n");
-        return NULL;
+        exit(-1);
     }
 
     if ((torus->vertexes = malloc(sizeof(G3Xpoint) * n1 * n2)) == NULL) {
         fprintf(stderr, "Failed to allocate memory for torus\n");
-        return NULL;
+        exit(-1);
     }
     if ((torus->normals = malloc(sizeof(G3Xvector) * n1 * n2)) == NULL) {
         fprintf(stderr, "Failed to allocate memory for torus\n");
-        return NULL;
+        exit(-1);
     }
 
     double cosTheta, sinTheta, cosPhi, sinPhi;

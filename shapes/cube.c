@@ -103,16 +103,16 @@ Shape *createCube(int n1) {
     Shape *cube;
     if ((cube = malloc(sizeof(Shape))) == NULL) {
         fprintf(stderr, "Failed to allocate memory for cube\n");
-        return NULL;
+        exit(-1);
     }
 
     if ((cube->vertexes = malloc(sizeof(G3Xpoint) * n1 * n1 * 6)) == NULL) {
         fprintf(stderr, "Failed to allocate memory for cube\n");
-        return NULL;
+        exit(-1);
     }
     if ((cube->normals = malloc(sizeof(G3Xvector) * n1 * n1 * 6)) == NULL) {
         fprintf(stderr, "Failed to allocate memory for cube\n");
-        return NULL;
+        exit(-1);
     }
 
     double d = 2. / (n1 - 1);

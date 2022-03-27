@@ -86,16 +86,16 @@ Shape *createCone(int n1, int n2, int n3) {
     Shape *cone;
     if ((cone = malloc(sizeof(Shape))) == NULL) {
         fprintf(stderr, "Failed to allocate memory for torus\n");
-        return NULL;
+        exit(-1);
     }
 
     if ((cone->vertexes = malloc(sizeof(G3Xpoint) * (n1 * n2 + n1 * n3))) == NULL) {
         fprintf(stderr, "Failed to allocate memory for torus\n");
-        return NULL;
+        exit(-1);
     }
     if ((cone->normals = malloc(sizeof(G3Xvector) * (n1 * n2 + n1 * n3))) == NULL) {
         fprintf(stderr, "Failed to allocate memory for torus\n");
-        return NULL;
+        exit(-1);
     }
 
     int offset = n1 * n2;

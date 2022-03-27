@@ -1,9 +1,3 @@
-/*=================================================================*/
-/*= E.Incerti - eric.incerti@univ-eiffel.fr                       =*/
-/*= Université Gustave Eiffel                                     =*/
-/*= Code "squelette" pour prototypage avec libg3x.6c              =*/
-/*=================================================================*/
-
 #include <math.h>
 #include <g3x.h>
 
@@ -19,7 +13,7 @@
 #include "scenes/tables.h"
 #include "scenes/pillarsway.h"
 
-/* tailles de la fenêtre (en pixel) */
+// Window size in pixels
 static int WWIDTH = 1024, WHEIGHT = 1024;
 
 Shape *sphere;
@@ -31,7 +25,7 @@ Shape *cube;
 SceneTree scene;
 G3Xvector scale = {1, 1, 1};
 
-/* la fonction d'initialisation : appelée 1 seule fois, au début */
+/* Init function, called once at the beginning */
 static void init(void) {
     sphere = createSphere(PI * MAXRES, PI * MAXRES / 2);
     cone = createCone(PI * MAXRES, MAXRES, MAXRES / 2);
@@ -48,20 +42,13 @@ static void init(void) {
 
 }
 
-/* la fonction de contrôle : appelée 1 seule fois, juste après <init> */
-static void ctrl(void) {}
-
-/* la fonction de dessin : appelée en boucle */
+/* Draw function, called in mail loop */
 static void draw(void) {
     drawTree(scene);
     glEnable(GL_CULL_FACE);
 }
 
-/* la fonction d'animation (facultatif) */
-static void anim(void) {
-}
-
-/* la fonction de sortie  (facultatif) -- atexit() */
+/* Exit function, called at the end of the program */
 static void quit(void) {
     freeShape(&sphere);
     freeShape(&cone);
@@ -72,20 +59,17 @@ static void quit(void) {
     freePillarsWay();
 }
 
-/***************************************************************************/
-/* La fonction principale : NE CHANGE JAMAIS ou presque                    */
-/***************************************************************************/
 int main(int argc, char **argv) {
-    /* creation de la fenetre - titre et tailles (pixels) */
+    // Window creation
     g3x_InitWindow(*argv, WWIDTH, WHEIGHT);
 
-    g3x_SetInitFunction(init); /* fonction d'initialisation */
-    g3x_SetCtrlFunction(ctrl); /* fonction de contrôle      */
-    g3x_SetDrawFunction(draw); /* fonction de dessin        */
-    g3x_SetAnimFunction(anim); /* fonction d'animation      */
-    g3x_SetExitFunction(quit); /* fonction de sortie        */
+    // Initialization function
+    g3x_SetInitFunction(init);
+    // Draw function
+    g3x_SetDrawFunction(draw);
+    // Exit function
+    g3x_SetExitFunction(quit);
 
-    /* lancement de la boucle principale */
+    // Main loop
     return g3x_MainStart();
-    /* RIEN APRES CA */
 }

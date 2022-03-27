@@ -55,16 +55,16 @@ Shape *createSphere(int n1, int n2) {
     Shape *sphere;
     if ((sphere = malloc(sizeof(Shape))) == NULL) {
         fprintf(stderr, "Failed to allocate memory for sphere\n");
-        return NULL;
+        exit(-1);
     }
 
     if ((sphere->vertexes = malloc(sizeof(G3Xpoint) * n1 * n2)) == NULL) {
         fprintf(stderr, "Failed to allocate memory for sphere\n");
-        return NULL;
+        exit(-1);
     }
     if ((sphere->normals = malloc(sizeof(G3Xvector) * n1 * n2)) == NULL) {
         fprintf(stderr, "Failed to allocate memory for sphere\n");
-        return NULL;
+        exit(-1);
     }
 
     double cosTheta, sinTheta, cosPhi, sinPhi;
