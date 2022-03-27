@@ -67,17 +67,22 @@ Shape *createTorus(int n1, int n2, double r1, double r2) {
         return NULL;
     }
 
+    double cosTheta, sinTheta, cosPhi, sinPhi;
     for (int i = 0; i < n1; i++) {
+        cosTheta = cos(i * theta);
+        sinTheta = sin(i * theta);
         for (int j = 0; j < n2; j++) {
+            cosPhi = cos(j * phi);
+            sinPhi = sin(j * phi);
             torus->vertexes[i * n2 + j] = (G3Xpoint) {
-                    cos(i * theta) * ((r1 + r2) + r2 * cos(j * phi)),
-                    -sin(i * theta) * ((r1 + r2) + r2 * cos(j * phi)),
-                    r2 * sin(j * phi)
+                    cosTheta * ((r1 + r2) + r2 * sinPhi),
+                    sinTheta * ((r1 + r2) + r2 * sinPhi),
+                    r2 * cosPhi
             };
             torus->normals[i * n2 + j] = (G3Xvector) {
-                    cos(i * theta) * cos(j * phi),
-                    -sin(i * theta) * cos(j * phi),
-                    sin(j * phi)
+                    cosTheta * sinPhi,
+                    sinTheta * sinPhi,
+                    cosPhi
             };
         }
     }

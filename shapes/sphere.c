@@ -67,18 +67,15 @@ Shape *createSphere(int n1, int n2) {
         return NULL;
     }
 
+    double cosTheta, sinTheta, cosPhi, sinPhi;
     for (int i = 0; i < n1; i++) {
+        cosTheta = cos(i * theta);
+        sinTheta = sin(i * theta);
         for (int j = 0; j < n2; j++) {
-            sphere->vertexes[i * n2 + j] = (G3Xpoint) {
-                    cos(i * theta) * sin(j * phi),
-                    sin(i * theta) * sin(j * phi),
-                    cos(j * phi)
-            };
-            sphere->normals[i * n2 + j] = (G3Xvector) {
-                    cos(i * theta) * sin(j * phi),
-                    sin(i * theta) * sin(j * phi),
-                    cos(j * phi)
-            };
+            cosPhi = cos(j * phi);
+            sinPhi = sin(j * phi);
+            sphere->vertexes[i * n2 + j] = (G3Xpoint) {cosTheta * sinPhi, sinTheta * sinPhi, cosPhi};
+            sphere->normals[i * n2 + j] = (G3Xvector) {cosTheta * sinPhi, sinTheta * sinPhi, cosPhi};
         }
     }
 

@@ -98,24 +98,24 @@ Shape *createCone(int n1, int n2, int n3) {
         return NULL;
     }
 
+    int offset = n1 * n2;
+    double cosTheta, sinTheta;
     for (int i = 0; i < n1; i++) {
+        cosTheta = cos(i * theta);
+        sinTheta = sin(i * theta);
         for (int j = 0; j < n2; j++) {
             double t = j * (2. / (n2 - 1)) - 1;
             cone->vertexes[i * n2 + j] = (G3Xpoint) {
-                    (1 - t) / 2. * cos(i * theta),
-                    (1 - t) / 2. * sin(i * theta),
+                    (1 - t) / 2. * cosTheta,
+                    (1 - t) / 2. * sinTheta,
                     t
             };
-            cone->normals[i * n2 + j] = (G3Xvector) {cos(i * theta), sin(i * theta), 1};
+            cone->normals[i * n2 + j] = (G3Xvector) {cosTheta, sinTheta, 1};
         }
-    }
-
-    int offset = n1 * n2;
-    for (int i = 0; i < n1; i++) {
         for (int j = 0; j < n3; j++) {
             cone->vertexes[offset + i * n3 + j] = (G3Xpoint) {
-                    cos(i * theta) * j * (1. / (n3 - 1)),
-                    sin(i * theta) * j * (1. / (n3 - 1)),
+                    cosTheta * j * (1. / (n3 - 1)),
+                    sinTheta * j * (1. / (n3 - 1)),
                     -1
             };
             cone->normals[offset + i * n3 + j] = (G3Xvector) {0, 0, -1};
