@@ -32,6 +32,30 @@ void drawTree(SceneTree tree) {
     drawTree(tree->sibling);
 }
 
+double findGreatestHomothety(SceneTree tree) {
+    if (tree == NULL) return 0;
+    static double maxScale = 0;
+
+    if (tree->scaleFactor.x > maxScale) maxScale = tree->scaleFactor.x;
+    if (tree->scaleFactor.y > maxScale) maxScale = tree->scaleFactor.y;
+    if (tree->scaleFactor.z > maxScale) maxScale = tree->scaleFactor.z;
+
+    if (tree->sibling != NULL) {
+        findGreatestHomothety(tree->sibling);
+    }
+    if (tree->child != NULL) {
+        findGreatestHomothety(tree->child);
+    }
+
+    return maxScale;
+}
+
+void sanitizeHomothety(SceneTree tree) {
+    if (tree == NULL) return;
+    double maxScale = 1. / findGreatestHomothety(tree);
+    applyHomothety3d(tree, maxScale, maxScale, maxScale);
+}
+
 void freeTree(SceneTree *tree) {
     if (tree == NULL || *tree == NULL) {
         return;

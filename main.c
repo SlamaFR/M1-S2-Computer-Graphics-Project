@@ -39,7 +39,7 @@ static void init(void) {
     initPillarsWay();
     addChild(scene, getPillarsWay(20));
     applyTranslation3d(scene, 0, -1, -.5);
-
+    sanitizeHomothety(scene);
 }
 
 /* Draw function, called in mail loop */

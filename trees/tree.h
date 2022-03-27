@@ -11,4 +11,6 @@
  */
 void drawTree(SceneTree tree);
 
+void sanitizeHomothety(SceneTree tree);
+
 void freeTree(SceneTree *tree);
