@@ -49,7 +49,7 @@ void addSibling(Node *node, Node *sibling) {
     assert(node != NULL);
     if (sibling == NULL) return;
 
-    for (; node->sibling; node = node->sibling);
+    sibling->sibling = node->sibling;
     node->sibling = sibling;
 }
 
