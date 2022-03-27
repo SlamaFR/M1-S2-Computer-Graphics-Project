@@ -42,45 +42,52 @@ void drawCubeFaces(struct shape__s_ *this, G3Xvector scale) {
     int offset = n1 * n1;
 
     glBegin(GL_QUADS);
+    int iNext, jNext;
     for (int i = 0; i < n1 - 1; i += step2) {
+        iNext = min(i + step2, n1 - 1);
         for (int j = 0; j < n1 - 1; j += step3) {
-            g3x_NormalVertex3dv(this, min(i + step2, n1 - 1) * n1 + j);
-            g3x_NormalVertex3dv(this, min(i + step2, n1 - 1) * n1 + min(j + step3, n1 - 1));
-            g3x_NormalVertex3dv(this, i * n1 + min(j + step3, n1 - 1));
+            jNext = min(j + step3, n1 - 1);
+            g3x_NormalVertex3dv(this, iNext * n1 + j);
+            g3x_NormalVertex3dv(this, iNext * n1 + jNext);
+            g3x_NormalVertex3dv(this, i * n1 + jNext);
             g3x_NormalVertex3dv(this, i * n1 + j);
 
             g3x_NormalVertex3dv(this, offset + i * n1 + j);
-            g3x_NormalVertex3dv(this, offset + i * n1 + min(j + step3, n1 - 1));
-            g3x_NormalVertex3dv(this, offset + min(i + step2, n1 - 1) * n1 + min(j + step3, n1 - 1));
-            g3x_NormalVertex3dv(this, offset + min(i + step2, n1 - 1) * n1 + j);
+            g3x_NormalVertex3dv(this, offset + i * n1 + jNext);
+            g3x_NormalVertex3dv(this, offset + iNext * n1 + jNext);
+            g3x_NormalVertex3dv(this, offset + iNext * n1 + j);
         }
     }
 
     for (int i = 0; i < n1 - 1; i += step1) {
+        iNext = min(i + step1, n1 - 1);
         for (int j = 0; j < n1 - 1; j += step3) {
+            jNext = min(j + step3, n1 - 1);
             g3x_NormalVertex3dv(this, (2 * offset) + i * n1 + j);
-            g3x_NormalVertex3dv(this, (2 * offset) + i * n1 + min(j + step3, n1 - 1));
-            g3x_NormalVertex3dv(this, (2 * offset) + min(i + step1, n1 - 1) * n1 + min(j + step3, n1 - 1));
-            g3x_NormalVertex3dv(this, (2 * offset) + min(i + step1, n1 - 1) * n1 + j);
+            g3x_NormalVertex3dv(this, (2 * offset) + i * n1 + jNext);
+            g3x_NormalVertex3dv(this, (2 * offset) + iNext * n1 + jNext);
+            g3x_NormalVertex3dv(this, (2 * offset) + iNext * n1 + j);
 
-            g3x_NormalVertex3dv(this, (3 * offset) + min(i + step1, n1 - 1) * n1 + j);
-            g3x_NormalVertex3dv(this, (3 * offset) + min(i + step1, n1 - 1) * n1 + min(j + step3, n1 - 1));
-            g3x_NormalVertex3dv(this, (3 * offset) + i * n1 + min(j + step3, n1 - 1));
+            g3x_NormalVertex3dv(this, (3 * offset) + iNext * n1 + j);
+            g3x_NormalVertex3dv(this, (3 * offset) + iNext * n1 + jNext);
+            g3x_NormalVertex3dv(this, (3 * offset) + i * n1 + jNext);
             g3x_NormalVertex3dv(this, (3 * offset) + i * n1 + j);
         }
     }
 
     for (int i = 0; i < n1 - 1; i += step1) {
+        iNext = min(i + step1, n1 - 1);
         for (int j = 0; j < n1 - 1; j += step2) {
-            g3x_NormalVertex3dv(this, (4 * offset) + min(i + step1, n1 - 1) * n1 + j);
-            g3x_NormalVertex3dv(this, (4 * offset) + min(i + step1, n1 - 1) * n1 + min(j + step2, n1 - 1));
-            g3x_NormalVertex3dv(this, (4 * offset) + i * n1 + min(j + step2, n1 - 1));
+            jNext = min(j + step2, n1 - 1);
+            g3x_NormalVertex3dv(this, (4 * offset) + iNext * n1 + j);
+            g3x_NormalVertex3dv(this, (4 * offset) + iNext * n1 + jNext);
+            g3x_NormalVertex3dv(this, (4 * offset) + i * n1 + jNext);
             g3x_NormalVertex3dv(this, (4 * offset) + i * n1 + j);
 
             g3x_NormalVertex3dv(this, (5 * offset) + i * n1 + j);
-            g3x_NormalVertex3dv(this, (5 * offset) + i * n1 + min(j + step2, n1 - 1));
-            g3x_NormalVertex3dv(this, (5 * offset) + min(i + step1, n1 - 1) * n1 + min(j + step2, n1 - 1));
-            g3x_NormalVertex3dv(this, (5 * offset) + min(i + step1, n1 - 1) * n1 + j);
+            g3x_NormalVertex3dv(this, (5 * offset) + i * n1 + jNext);
+            g3x_NormalVertex3dv(this, (5 * offset) + iNext * n1 + jNext);
+            g3x_NormalVertex3dv(this, (5 * offset) + iNext * n1 + j);
         }
     }
     glEnd();

@@ -29,12 +29,15 @@ void drawSphereFaces(struct shape__s_ *this, G3Xvector scale) {
     int step2 = scale.y > 0 ? 1. / scale.y : 1;
 
     glBegin(GL_QUADS);
+    int iNext, jNext;
     for (int i = 0; i < n1 - 1; i += step1) {
+        iNext = min(i + step1, n1 - 1);
         for (int j = 0; j < n2 - 1; j += step2) {
+            jNext = min(j + step2, n2 - 1);
             g3x_NormalVertex3dv(this, i * n2 + j);
-            g3x_NormalVertex3dv(this, i * n2 + min(j + step2, n2 - 1));
-            g3x_NormalVertex3dv(this, min(i + step1, n1 - 1) * n2 + min(j + step2, n2 - 1));
-            g3x_NormalVertex3dv(this, min(i + step1, n1 - 1) * n2 + j);
+            g3x_NormalVertex3dv(this, i * n2 + jNext);
+            g3x_NormalVertex3dv(this, iNext * n2 + jNext);
+            g3x_NormalVertex3dv(this, iNext * n2 + j);
         }
     }
     glEnd();

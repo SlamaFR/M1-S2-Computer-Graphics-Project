@@ -39,23 +39,27 @@ void drawCylinderFaces(struct shape__s_ *this, G3Xvector scale) {
 
     int offset = n1 * n2;
     glBegin(GL_QUADS);
+    int iNext, jNext;
     for (int i = 0; i < n1 - 1; i += step1) {
+        iNext = min(i + step1, n1 - 1);
         for (int j = 0; j < n2 - 1; j += step2) {
-            g3x_NormalVertex3dv(this, min(i + step1, n1 - 1) * n2 + min(j + step2, n2 - 1));
-            g3x_NormalVertex3dv(this, i * n2 + min(j + step2, n2 - 1));
+            jNext = min(j + step2, n2 - 1);
+            g3x_NormalVertex3dv(this, iNext * n2 + jNext);
+            g3x_NormalVertex3dv(this, i * n2 + jNext);
             g3x_NormalVertex3dv(this, i * n2 + j);
-            g3x_NormalVertex3dv(this, min(i + step1, n1 - 1) * n2 + j);
+            g3x_NormalVertex3dv(this, iNext * n2 + j);
         }
 
         for (int j = step3; j < n3 - 1; j += step3) {
+            jNext = min(j + step3, n3 - 1);
             g3x_NormalVertex3dv(this, offset + i * n3 + j);
-            g3x_NormalVertex3dv(this, offset + i * n3 + min(j + step3, n3 - 1));
-            g3x_NormalVertex3dv(this, offset + min(i + step1, n1 - 1) * n3 + min(j + step3, n3 - 1));
-            g3x_NormalVertex3dv(this, offset + min(i + step1, n1 - 1) * n3 + j);
+            g3x_NormalVertex3dv(this, offset + i * n3 + jNext);
+            g3x_NormalVertex3dv(this, offset + iNext * n3 + jNext);
+            g3x_NormalVertex3dv(this, offset + iNext * n3 + j);
 
-            g3x_NormalVertex3dv(this, offset + (n1 * n3) + min(i + step1, n1 - 1) * n3 + j);
-            g3x_NormalVertex3dv(this, offset + (n1 * n3) + min(i + step1, n1 - 1) * n3 + min(j + step3, n3 - 1));
-            g3x_NormalVertex3dv(this, offset + (n1 * n3) + i * n3 + min(j + step3, n3 - 1));
+            g3x_NormalVertex3dv(this, offset + (n1 * n3) + iNext * n3 + j);
+            g3x_NormalVertex3dv(this, offset + (n1 * n3) + iNext * n3 + jNext);
+            g3x_NormalVertex3dv(this, offset + (n1 * n3) + i * n3 + jNext);
             g3x_NormalVertex3dv(this, offset + (n1 * n3) + i * n3 + j);
         }
     }
@@ -63,21 +67,23 @@ void drawCylinderFaces(struct shape__s_ *this, G3Xvector scale) {
 
     glBegin(GL_TRIANGLES);
     for (int i = 0; i < n1 - 1; i += step1) {
+        iNext = min(i + step1, n1 - 1);
+        jNext = min(step3, n3 - 1);
         g3x_NormalVertex3dv(this, offset + i * n3);
-        g3x_NormalVertex3dv(this, offset + i * n3 + min(step3, n3 - 1));
-        g3x_NormalVertex3dv(this, offset + min(i + step1, n1 - 1) * n3 + min(step3, n3 - 1));
+        g3x_NormalVertex3dv(this, offset + i * n3 + jNext);
+        g3x_NormalVertex3dv(this, offset + iNext * n3 + jNext);
 
         g3x_NormalVertex3dv(this, offset + i * n3);
-        g3x_NormalVertex3dv(this, offset + min(i + step1, n1 - 1) * n3 + min(step3, n3 - 1));
-        g3x_NormalVertex3dv(this, offset + min(i + step1, n1 - 1) * n3);
+        g3x_NormalVertex3dv(this, offset + iNext * n3 + jNext);
+        g3x_NormalVertex3dv(this, offset + iNext * n3);
 
 
-        g3x_NormalVertex3dv(this, offset + (n1 * n3) + min(i + step1, n1 - 1) * n3 + min(step3, n3 - 1));
-        g3x_NormalVertex3dv(this, offset + (n1 * n3) + i * n3 + min(step3, n3 - 1));
+        g3x_NormalVertex3dv(this, offset + (n1 * n3) + iNext * n3 + jNext);
+        g3x_NormalVertex3dv(this, offset + (n1 * n3) + i * n3 + jNext);
         g3x_NormalVertex3dv(this, offset + (n1 * n3) + i * n3);
 
-        g3x_NormalVertex3dv(this, offset + (n1 * n3) + min(i + step1, n1 - 1) * n3);
-        g3x_NormalVertex3dv(this, offset + (n1 * n3) + min(i + step1, n1 - 1) * n3 + min(step3, n3 - 1));
+        g3x_NormalVertex3dv(this, offset + (n1 * n3) + iNext * n3);
+        g3x_NormalVertex3dv(this, offset + (n1 * n3) + iNext * n3 + jNext);
         g3x_NormalVertex3dv(this, offset + (n1 * n3) + i * n3);
     }
     glEnd();
