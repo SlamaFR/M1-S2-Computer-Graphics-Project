@@ -10,9 +10,6 @@ void propagateScale(Node *node, double x, double y, double z) {
         node->scaleFactor.y *= y;
         node->scaleFactor.z *= z;
     }
-    if (node->sibling) {
-        propagateScale(node->sibling, x, y, z);
-    }
     if (node->child) {
         propagateScale(node->child, x, y, z);
     }
