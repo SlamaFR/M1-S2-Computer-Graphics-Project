@@ -23,6 +23,8 @@ cmake ..
 make
 ```
 
+The `build` directory now contains the two executables `tables` and `pillars`.
+
 ## Features
 
 Scene graph handles homothety, rotation and translation.

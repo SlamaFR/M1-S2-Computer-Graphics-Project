@@ -9,8 +9,8 @@ file(GLOB_RECURSE SCENES_FILES src/scenes/*.c)
 file(GLOB_RECURSE SHAPES_FILES src/shapes/*.c)
 file(GLOB_RECURSE TREES_FILES src/trees/*.c)
 
-add_executable(scene1 ${SCENES_FILES} ${SHAPES_FILES} ${TREES_FILES} src/utils.c src/scene1.c)
-add_executable(scene2 ${SCENES_FILES} ${SHAPES_FILES} ${TREES_FILES} src/utils.c src/scene2.c)
+add_executable(tables ${SCENES_FILES} ${SHAPES_FILES} ${TREES_FILES} src/utils.c src/scene1.c)
+add_executable(pillars ${SCENES_FILES} ${SHAPES_FILES} ${TREES_FILES} src/utils.c src/scene2.c)
 
 # Remove warnings at compilation time
 add_definitions(-w)
