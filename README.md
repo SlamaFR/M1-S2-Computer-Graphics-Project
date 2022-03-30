@@ -34,12 +34,10 @@ This is done by using a scaling factor on each node.
 
 ## Screenshots
 
-### Pillars way
-| ![](img/pillars.png) | ![](img/pillars_mesh.png) |
-|----------------------|---------------------------|
-
 ### Tables
 | ![](img/tables.png) | ![](img/tables_mesh.png) |
 |---------------------|--------------------------|
 
-
+### Pillars way
+| ![](img/pillars.png) | ![](img/pillars_mesh.png) |
+|----------------------|---------------------------|
