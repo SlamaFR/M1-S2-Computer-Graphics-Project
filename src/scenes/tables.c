@@ -1,4 +1,4 @@
-#include "tables.h"
+#include "../../include/scenes/tables.h"
 
 extern Shape *cube;
 extern Shape *cylinder;

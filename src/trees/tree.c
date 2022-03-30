@@ -1,4 +1,4 @@
-#include "tree.h"
+#include "../../include/trees/tree.h"
 
 void drawTree(SceneTree tree) {
     if (tree == NULL) return;

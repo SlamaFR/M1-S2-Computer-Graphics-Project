@@ -2,9 +2,9 @@
 #include <stdlib.h>
 #include <time.h>
 
-#include "pillarsway.h"
-#include "../shapes/torus.h"
-#include "../utils.h"
+#include "../../include/scenes/pillarsway.h"
+#include "../../include/shapes/torus.h"
+#include "../../include/utils.h"
 
 extern Shape *sphere;
 extern Shape *cylinder;

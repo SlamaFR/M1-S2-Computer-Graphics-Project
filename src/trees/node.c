@@ -1,5 +1,5 @@
 #include <assert.h>
-#include "node.h"
+#include "../../include/trees/node.h"
 
 void propagateScale(Node *node, double x, double y, double z) {
     if (node == NULL) return;

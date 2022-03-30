@@ -1,4 +1,4 @@
-#include "shapes.h"
+#include "../../include/shapes/shapes.h"
 
 void freeShape(Shape **shape) {
     free((*shape)->vertexes);

@@ -1,15 +1,15 @@
 #include <g3x.h>
 
-#include "shapes/sphere.h"
-#include "shapes/torus.h"
-#include "shapes/cylinder.h"
-#include "shapes/cone.h"
-#include "shapes/cube.h"
+#include "../include/shapes/sphere.h"
+#include "../include/shapes/torus.h"
+#include "../include/shapes/cylinder.h"
+#include "../include/shapes/cone.h"
+#include "../include/shapes/cube.h"
 
-#include "trees/node.h"
-#include "trees/tree.h"
+#include "../include/trees/node.h"
+#include "../include/trees/tree.h"
 
-#include "scenes/pillarsway.h"
+#include "../include/scenes/pillarsway.h"
 
 // Window size in pixels
 static int WWIDTH = 1024, WHEIGHT = 1024;

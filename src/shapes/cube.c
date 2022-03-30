@@ -1,6 +1,6 @@
-#include "sphere.h"
-#include "../utils.h"
-#include "../trees/node.h"
+#include "../../include/shapes/sphere.h"
+#include "../../include/utils.h"
+#include "../../include/trees/node.h"
 
 void drawCubePoints(struct shape__s_ *this, G3Xvector scale) {
     int n1 = this->n1;

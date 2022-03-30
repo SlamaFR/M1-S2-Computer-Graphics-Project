@@ -1,8 +1,8 @@
 #include <math.h>
 
-#include "cone.h"
-#include "../utils.h"
-#include "../trees/node.h"
+#include "../../include/shapes/cone.h"
+#include "../../include/utils.h"
+#include "../../include/trees/node.h"
 
 void drawConePoints(struct shape__s_ *this, G3Xvector scale) {
     int n1 = this->n1;
