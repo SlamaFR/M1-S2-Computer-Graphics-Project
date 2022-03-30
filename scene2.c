@@ -1,4 +1,3 @@
-#include <math.h>
 #include <g3x.h>
 
 #include "shapes/sphere.h"
@@ -10,7 +9,6 @@
 #include "trees/node.h"
 #include "trees/tree.h"
 
-#include "scenes/tables.h"
 #include "scenes/pillarsway.h"
 
 // Window size in pixels
@@ -61,7 +59,7 @@ static void quit(void) {
 
 int main(int argc, char **argv) {
     // Window creation
-    g3x_InitWindow(*argv, WWIDTH, WHEIGHT);
+    g3x_InitWindow("Pillars Way Scene", WWIDTH, WHEIGHT);
 
     // Initialization function
     g3x_SetInitFunction(init);

@@ -8,7 +8,9 @@ set(CMAKE_C_FLAGS "-lm -L$ENV{lGL_PATH} -framework OpenGL -framework GLUT -L$ENV
 file(GLOB_RECURSE SCENES_FILES scenes/*.c)
 file(GLOB_RECURSE SHAPES_FILES shapes/*.c)
 file(GLOB_RECURSE TREES_FILES trees/*.c)
-add_executable(project ${SCENES_FILES} ${SHAPES_FILES} ${TREES_FILES} utils.c main.c)
+
+add_executable(scene1 ${SCENES_FILES} ${SHAPES_FILES} ${TREES_FILES} utils.c scene1.c)
+add_executable(scene2 ${SCENES_FILES} ${SHAPES_FILES} ${TREES_FILES} utils.c scene2.c)
 
 # Remove warnings at compilation time
 add_definitions(-w)
