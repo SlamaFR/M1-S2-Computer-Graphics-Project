@@ -1,7 +1,7 @@
 #include <assert.h>
 #include "../../include/trees/node.h"
 
-void propagateScale(Node *node, double x, double y, double z) {
+void propagateScale(Node *node, double x, double y, double z, int sibling) {
     if (node == NULL) return;
     if (node->instance != NULL) {
         node->instance->updateScale((Node *) node, x, y, z);
@@ -11,7 +11,10 @@ void propagateScale(Node *node, double x, double y, double z) {
         node->scaleFactor.z *= z;
     }
     if (node->child) {
-        propagateScale(node->child, x, y, z);
+        propagateScale(node->child, x, y, z, 1);
+    }
+    if (node->sibling && sibling == 1) {
+        propagateScale(node->sibling, x, y, z, 1);
     }
 }
 
@@ -31,7 +34,7 @@ Node *applyRotation(Node *node, G3Xhmat rotation) {
 }
 
 Node *applyHomothety3d(Node *node, double x, double y, double z) {
-    propagateScale(node, x, y, z);
+    propagateScale(node, x, y, z, 0);
     applyTransformMatrix(node, g3x_Homothetie3d(x, y, z));
     return node;
 }
@@ -39,7 +42,7 @@ Node *applyHomothety3d(Node *node, double x, double y, double z) {
 void inheritProperties(Node *ancester, Node *descendant) {
     memcpy(descendant->material, ancester->material, 4 * sizeof(float));
     descendant->color = ancester->color;
-    propagateScale(descendant, ancester->scaleFactor.x, ancester->scaleFactor.y, ancester->scaleFactor.z);
+    propagateScale(descendant, ancester->scaleFactor.x, ancester->scaleFactor.y, ancester->scaleFactor.z, 0);
 }
 
 void addSibling(Node *node, Node *sibling) {
