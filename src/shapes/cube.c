@@ -10,24 +10,31 @@ void drawCubePoints(struct shape__s_ *this, G3Xvector scale) {
     int step3 = scale.z > 0 ? 1. / scale.z : 1;
     int offset = n1 * n1;
 
+    int _i, _j;
     glPointSize(2);
     glBegin(GL_POINTS);
-    for (int i = 0; i < n1; i += step2) {
-        for (int j = 0; j < n1; j += step1) {
-            g3x_NormalVertex3dv(this, i * n1 + j);
-            g3x_NormalVertex3dv(this, offset + i * n1 + j);
+    for (int i = 0; i <= n1 + step2; i += step2) {
+        _i = min(i, n1 - 1);
+        for (int j = 0; j < n1 + step3; j += step3) {
+            _j = min(j, n1 - 1);
+            g3x_NormalVertex3dv(this, _i * n1 + _j);
+            g3x_NormalVertex3dv(this, offset + _i * n1 + _j);
         }
     }
-    for (int i = 0; i < n1; i += step2) {
-        for (int j = 0; j < n1; j += step3) {
-            g3x_NormalVertex3dv(this, (2 * offset) + i * n1 + j);
-            g3x_NormalVertex3dv(this, (3 * offset) + i * n1 + j);
+    for (int i = 0; i < n1 + step1; i += step1) {
+        _i = min(i, n1 - 1);
+        for (int j = 0; j < n1 + step3; j += step3) {
+            _j = min(j, n1 - 1);
+            g3x_NormalVertex3dv(this, (2 * offset) + _i * n1 + _j);
+            g3x_NormalVertex3dv(this, (3 * offset) + _i * n1 + _j);
         }
     }
-    for (int i = 0; i < n1; i += step1) {
-        for (int j = 0; j < n1; j += step3) {
-            g3x_NormalVertex3dv(this, (4 * offset) + i * n1 + j);
-            g3x_NormalVertex3dv(this, (5 * offset) + i * n1 + j);
+    for (int i = 0; i < n1 + step1; i += step1) {
+        _i = min(i, n1 - 1);
+        for (int j = 0; j < n1 + step2; j += step2) {
+            _j = min(j, n1 - 1);
+            g3x_NormalVertex3dv(this, (4 * offset) + _i * n1 + _j);
+            g3x_NormalVertex3dv(this, (5 * offset) + _i * n1 + _j);
         }
     }
     glEnd();

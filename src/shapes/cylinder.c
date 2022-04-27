@@ -14,15 +14,19 @@ void drawCylinderPoints(struct shape__s_ *this, G3Xvector scale) {
     int step3 = scale.z > 0 ? 1. / scale.z : 1;
 
     int offset = n1 * n2;
+    int _i, _j;
     glPointSize(2);
     glBegin(GL_POINTS);
-    for (int i = 0; i < n1; i += step1) {
-        for (int j = 0; j < n2; j += step2) {
-            g3x_NormalVertex3dv(this, i * n2 + j);
+    for (int i = 0; i < n1 + step1; i += step1) {
+        _i = min(i, n1 - 1);
+        for (int j = 0; j < n2 + step3; j += step2) {
+            _j = min(j, n2 - 1);
+            g3x_NormalVertex3dv(this, _i * n2 + _j);
         }
-        for (int j = 0; j < n3; j += step3) {
-            g3x_NormalVertex3dv(this, offset + i * n3 + j);
-            g3x_NormalVertex3dv(this, offset + (n1 * n3) + i * n3 + j);
+        for (int j = 0; j < n3 + step3; j += step3) {
+            _j = min(j, n3 - 1);
+            g3x_NormalVertex3dv(this, offset + _i * n3 + _j);
+            g3x_NormalVertex3dv(this, offset + (n1 * n3) + _i * n3 + _j);
         }
     }
     glEnd();

@@ -11,11 +11,14 @@ void drawTorusPoints(struct shape__s_ *this, G3Xvector scale) {
     int step1 = scale.x > 0 ? 1. / scale.x : 1;
     int step2 = scale.y > 0 ? 1. / scale.y : 1;
 
+    int _i, _j;
     glPointSize(2);
     glBegin(GL_POINTS);
     for (int i = 0; i < n1 - 1; i += step1) {
+        _i = min(i, n1 - 1);
         for (int j = 0; j < n2 - 1; j += step2) {
-            g3x_NormalVertex3dv(this, i * n2 + j);
+            _j = min(j, n2 - 1);
+            g3x_NormalVertex3dv(this, _i * n2 + _j);
         }
     }
     glEnd();
